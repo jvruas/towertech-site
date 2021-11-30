@@ -1,7 +1,11 @@
 {
     "name": "pi-ads-2020-2",
     "version": "1.0.0",
+    "engines": {
+    	"node": "12"
+    },
     "private": true,
+    "main": "bin/www",
     "scripts": {
         "start": "node ./bin/www"
     },
