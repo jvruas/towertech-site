@@ -1,138 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./../css/reset.css" />
-    <link rel="stylesheet" href="../css/navbar_sistema2.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./../css/cad_empresa.css" />
-    <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
-    <script src="../JS/navbar.js"></script>
-    <script type="text/javascript" src="../JS/funcoes.js"></script>
-    <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
-    <title>Cadastro Empresa</title>
-</head>
-<body>
-  
-    <header>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./../css/reset.css" />
+        <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="./../css/cad_empresa.css" />
+        <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+        <script src="../JS/navbar.js"></script>
+        <script type="text/javascript" src="../JS/funcoes.js"></script>
+        <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+        <title>Cadastro Empresa</title>
+    </head>
+    <body>
+        <header>
+            <div class="menu">
+                <div class="he-grid">
+                    <div class="logo_menu">
+                        <a href="home_root.html"
+                            ><img src="../imagens/TOWER_TECH.png"
+                        /></a>
+                    </div>
 
-      <div class="menu">
-        <div class="he-grid">
-          <div class="logo_menu">
-            <a href="home_root.html"><img  src="../imagens/TOWER_TECH.png" /></a>
-          </div>
-
-          <div class="menu_fechado">
-            <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
-          </div>
-
-        </div>
-      </div>
-
-      <div class="header_desktop">
-        <div class="grid_desktop">
-          <div class="primeira_div">
-            <a href="home_root.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="" /></a>
-            <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
-          </div>
-          <div class="cadastro_servidor">
-            <h5>CADASTRO</h5>
-            <a href="./cad_empresa.html"><button>Cadastrar empresas</button></a>
-            <a href="./cad_torre.html"><button>Cadastrar torres</button></a>
-            <a href="./previsao_gerente.html"><button>Precisão de dados</button></a>
-          </div>
-          <div class="info_Servidor">
-            <h5>LOCALIZAÇÃO</h5>
-            <div class="scrollInfoServidor">
-              <div class="torres">
-                <div class="a1">
-                  <h3>Servidor AWS</h3>
+                    <div class="menu_fechado">
+                        <img
+                            src="../imagens/icone_menu.png"
+                            id="menu"
+                            onclick="abrirMenuSistema()"
+                        />
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
-        </div>
-      </div>
-    </header>
-        
-
-    <section>
-        <form id="cad_empresa" action="" onsubmit="return cadastrar()">
-          <div class="grid">
-            <h2>CADASTRO DE EMPRESAS</h2>
-            <div class="cf-inputs">
-              <div class="input">
-                <input type="text" name="nome_empresa" required />
-                <label for="nome_empresa">Nome Empresa</label>
-              </div>
-              <div class="input">
-                <input type="number" name="cnpj" required />
-                <label for="cnpj">CNPJ</label>
-              </div>
-              <div class="input">
-                <input type="number" name="telefone" required />
-                <label for="telefone">Telefone Fixo</label>
-              </div>
-              <div class="input">
-                <input type="number" name="cep" required />
-                <label for="cep">CEP</label>
-              </div>
-              <div class="input">
-                <input type="text" name="logradouro" required />
-                <label for="logradouro">Logradouro</label>
-              </div>
-              <div class="input">
-                <input type="number" name="numero" required />
-                <label for="numero">Número</label>
-              </div>
-              <div class="input">
-                <input type="text" name="cidade" required />
-                <label for="cidade">Cidade</label>
-              </div>
-              <div class="input">
-                <input type="text" name="estado" required />
-                <label for="estado">Estado</label>
-              </div>
-              
             </div>
 
-            <div class="cf-btn">
-              <button>ENVIAR</button>
+            <div class="header_desktop">
+                <div class="grid_desktop">
+                    <div class="primeira_div">
+                        <a href="home_root.html" id="logo_menu_desktop"
+                            ><img
+                                src="../imagens/TOWER_TECH.png"
+                                id="logo_menu_desktop"
+                                alt=""
+                        /></a>
+                        <h3>
+                            Bem-vindo(a), <span id="id_nome_usuario"></span>!
+                        </h3>
+                    </div>
+                    <div class="cadastro_servidor">
+                        <h5>CADASTRO</h5>
+                        <a href="./cad_empresa.html"
+                            ><button>Cadastrar empresas</button></a
+                        >
+                        <a href="./cad_torre.html"
+                            ><button>Cadastrar torres</button></a
+                        >
+                        <a href="./previsao_gerente.html"
+                            ><button>Previsão de dados</button></a
+                        >
+                    </div>
+                    <div class="info_Servidor">
+                        <h5>LOCALIZAÇÃO</h5>
+                        <div class="scrollInfoServidor">
+                            <div class="torres">
+                                <div class="a1">
+                                    <h3>Servidor AWS</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="sair" onclick="logoff()"
+                        ><i class="fas fa-sign-out-alt"></i
+                    ></a>
+                </div>
             </div>
-          </div>
-        </form>
-    </section>
-</body>
+        </header>
+
+        <section>
+            <form id="cad_empresa" action="" onsubmit="return cadastrar()">
+                <div class="grid">
+                    <h2>CADASTRO DE EMPRESAS</h2>
+                    <div class="cf-inputs">
+                        <div class="input">
+                            <input type="text" name="nome_empresa" required />
+                            <label for="nome_empresa">Nome Empresa</label>
+                        </div>
+                        <div class="input">
+                            <input type="number" name="cnpj" required />
+                            <label for="cnpj">CNPJ</label>
+                        </div>
+                        <div class="input">
+                            <input type="number" name="telefone" required />
+                            <label for="telefone">Telefone Fixo</label>
+                        </div>
+                        <div class="input">
+                            <input type="number" name="cep" required />
+                            <label for="cep">CEP</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" name="logradouro" required />
+                            <label for="logradouro">Logradouro</label>
+                        </div>
+                        <div class="input">
+                            <input type="number" name="numero" required />
+                            <label for="numero">Número</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" name="cidade" required />
+                            <label for="cidade">Cidade</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" name="estado" required />
+                            <label for="estado">Estado</label>
+                        </div>
+                    </div>
+
+                    <div class="cf-btn">
+                        <button>ENVIAR</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
 </html>
 
 <script>
-  verificar_pagina("R")
-  verificar_autenticacao()
+    verificar_pagina("R");
+    verificar_autenticacao();
 
-  function cadastrar() {
-    var formulario = new URLSearchParams(new FormData(cad_empresa));
-    fetch("/usuarios/cadastrarEmpresa", {
-      method: "POST",
-      body: formulario
-    }).then(function (response) {
-
-      if (response.ok) {
-        alert("Empresa cadastrado com sucesso!")
-
-      } else {
-
-        console.log('Erro de cadastro!');
-        response.text().then(function (resposta) {
-          div_erro.innerHTML = resposta;
+    function cadastrar() {
+        var formulario = new URLSearchParams(new FormData(cad_empresa));
+        fetch("/usuarios/cadastrarEmpresa", {
+            method: "POST",
+            body: formulario,
+        }).then(function (response) {
+            if (response.ok) {
+                alert("Empresa cadastrado com sucesso!");
+            } else {
+                console.log("Erro de cadastro!");
+                response.text().then(function (resposta) {
+                    div_erro.innerHTML = resposta;
+                });
+            }
         });
-      }
-    });
 
-    return false;
-  }
+        return false;
+    }
 </script>

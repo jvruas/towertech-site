@@ -1,136 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/dash_analista.css" />
+        <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+        <script
+            type="text/javascript"
+            src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"
+        ></script>
+        <script type="text/javascript" src="../JS/funcoes.js"></script>
+        <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+        <title>Dashboard Analista</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/dash_analista.css">
-  <link rel="stylesheet" href="../css/reset.css">
-  <link rel="stylesheet" href="../css/navbar_sistema2.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
-  <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript" src="../JS/funcoes.js"></script>
-  <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
-  <title>Dashboard Analista</title>
-</head>
-
-<body>
-  <header>
-    
-    <div class="menu">
-      <div class="he-grid">
-        <div class="logo_menu">
-          <a href="home_analista.html"><img src="../imagens/TOWER_TECH.png" /></a>
-        </div>
-        <div class="menu_fechado">
-          <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
-        </div>
-      </div>
-    </div>
-
-    <div class="header_desktop">
-      <div class="grid_desktop">
-        <div class="primeira_div">
-          <a href="home_analista.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="Logo"/></a>
-          <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
-        </div>
-        <div class="cadastro">
-          <h5>CADASTRO</h5>
-          <a href="./cad_maquina.html"><button>Cadastrar máquinas</button></a>
-        </div>
-        <div class="localizacao">
-          <h5>LOCALIZAÇÃO</h5>
-          <div class="scrollLocalizacao">
-           
-          </div>
-        </div>
-        <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
-      </div>
-    </div>
-  </header>
-
-
-  <section>   
-      <div class="container__dash">
-
-        <div class="servidor">
-            <div class="titulo">
-                <h1>MÁQUINA <span id="id_computador"></span></h1>
+    <body>
+        <header>
+            <div class="menu">
+                <div class="he-grid">
+                    <div class="logo_menu">
+                        <a href="home_analista.html"
+                            ><img src="../imagens/TOWER_TECH.png"
+                        /></a>
+                    </div>
+                    <div class="menu_fechado">
+                        <img
+                            src="../imagens/icone_menu.png"
+                            id="menu"
+                            onclick="abrirMenuSistema()"
+                        />
+                    </div>
+                </div>
             </div>
-             
-            <div class="info_servidor">
-                <div class="localizacao_servidor">
-                    <h3>Usuário:</h3>
-                    <p id="id_usuario"></p>
+
+            <div class="header_desktop">
+                <div class="grid_desktop">
+                    <div class="primeira_div">
+                        <a href="home_analista.html" id="logo_menu_desktop"
+                            ><img
+                                src="../imagens/TOWER_TECH.png"
+                                id="logo_menu_desktop"
+                                alt="Logo"
+                        /></a>
+                        <h3>
+                            Bem-vindo(a), <span id="id_nome_usuario"></span>!
+                        </h3>
+                    </div>
+                    <div class="cadastro">
+                        <h5>CADASTRO</h5>
+                        <a href="./cad_maquina.html"
+                            ><button>Cadastrar máquinas</button></a
+                        >
+                    </div>
+                    <div class="localizacao">
+                        <h5>LOCALIZAÇÃO</h5>
+                        <div class="scrollLocalizacao"></div>
+                    </div>
+                    <a class="sair" onclick="logoff()"
+                        ><i class="fas fa-sign-out-alt"></i
+                    ></a>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="container__dash">
+                <div class="servidor">
+                    <div class="titulo">
+                        <h1>MÁQUINA <span id="id_computador"></span></h1>
+                    </div>
+
+                    <div class="info_servidor">
+                        <div class="localizacao_servidor">
+                            <h3>Usuário:</h3>
+                            <p id="id_usuario"></p>
+                        </div>
+
+                        <div class="status_servidor">
+                            <h3>Internet:</h3>
+                            <p id="id_internet"></p>
+                            <div class="conexao"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="status_servidor">
-                    <h3>Internet:</h3>
-                    <p id="id_internet"></p>
-                    <div class="conexao"></div>
+                <div class="graficos">
+                    <div class="grafico">
+                        <h3>
+                            GRÁFICO CPU - TEMPO REAL <span id="id_cpu"> </span>
+                        </h3>
+                        <canvas id="canvas_grafico"></canvas>
+                    </div>
+
+                    <div class="grafico">
+                        <h3>
+                            GRÁFICO DISCO - TEMPO REAL
+                            <span id="id_disco"> </span>
+                        </h3>
+                        <canvas id="canvas_grafico1"></canvas>
+                    </div>
+
+                    <div class="grafico">
+                        <h3>
+                            GRÁFICO MEMÓRIA RAM - TEMPO REAL
+                            <span id="id_ram"> </span>
+                        </h3>
+                        <canvas id="canvas_grafico2"></canvas>
+                    </div>
                 </div>
-            </div> 
-        </div>
-
-        <div class="graficos">
-          <div class="grafico">
-            <h3>GRÁFICO CPU - TEMPO REAL <span id="id_cpu"> </span></h3>
-            <canvas id="canvas_grafico"></canvas>
-          </div>
-          
-          <div class="grafico">
-            <h3>GRÁFICO DISCO - TEMPO REAL <span id="id_disco"> </span></h3>
-            <canvas id="canvas_grafico1"></canvas>
-          </div>
-
-          <div class="grafico">
-            <h3>GRÁFICO MEMÓRIA RAM - TEMPO REAL <span id="id_ram"> </span></h3>
-            <canvas id="canvas_grafico2"></canvas>
-          </div>
-        </div>
-    </div>
-  </section>
-</body>
-
+            </div>
+        </section>
+    </body>
 </html>
 <script src="../JS/navbar.js"></script>
 
 <script>
-  let proximaAtualizacao;
-  verificar_pagina("A")
-  verificar_autenticacao()
+    let proximaAtualizacao;
+    verificar_pagina("A");
+    verificar_autenticacao();
 
-  function queryString(parameter) {
-    var loc = location.search.substring(1, location.search.length);
-    var param_value = false;
-    var params = loc.split("&");
-    for (i = 0; i < params.length; i++) {
-      param_name = params[i].substring(0, params[i].indexOf('='));
-      if (param_name == parameter) {
-        param_value = params[i].substring(params[i].indexOf('=') + 1)
-      }
+    function queryString(parameter) {
+        var loc = location.search.substring(1, location.search.length);
+        var param_value = false;
+        var params = loc.split("&");
+        for (i = 0; i < params.length; i++) {
+            param_name = params[i].substring(0, params[i].indexOf("="));
+            if (param_name == parameter) {
+                param_value = params[i].substring(params[i].indexOf("=") + 1);
+            }
+        }
+        if (param_value) {
+            return param_value;
+        } else {
+            return undefined;
+        }
     }
-    if (param_value) {
-      return param_value;
-    } else {
-      return undefined;
-    }
-  }
 
-  var parametros = queryString("minhaVariavel");
-  var fkComputador = parametros.slice(0, 1);
-  var fkTorre = parametros.slice(1, 2);
-  console.log(parametros.slice(0, 1));
-  console.log(parametros.slice(1, 2));
-  var fkEmpresa = get_fk_empresa();
+    var parametros = queryString("minhaVariavel");
+    var fkComputador = parametros.slice(0, 1);
+    var fkTorre = parametros.slice(1, 2);
+    console.log(parametros.slice(0, 1));
+    console.log(parametros.slice(1, 2));
+    var fkEmpresa = get_fk_empresa();
 
-
-  qtdTorre(get_fk_empresa())
-  setTimeout(() => {  qtdComputadoreNavBar(get_fk_empresa()); }, 1000);
-  obterDadosGraficoPrimeiraVez(fkComputador, fkTorre, fkEmpresa)
+    qtdTorre(get_fk_empresa());
+    setTimeout(() => {
+        qtdComputadoreNavBar(get_fk_empresa());
+    }, 1000);
+    obterDadosGraficoPrimeiraVez(fkComputador, fkTorre, fkEmpresa);
 </script>

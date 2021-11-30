@@ -1,427 +1,531 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./../css/reset.css" />
-    <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
-    <link rel="stylesheet" href="../css/navbar_sistema2.css" />
-    <link rel="stylesheet" href="../css/previsao_gerente.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../JS/navbar.js"></script>
-    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="../JS/funcoes.js"></script>
-    <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
-    <script type="text/javascript" src="../JS/graficos_servidor.js"></script>
-    <title>Previsão gerente</title>
-</head>
-<body>
-    <header>
-
-        <div class="menu">
-          <div class="he-grid">
-            <div class="logo_menu">
-              <a href="home_gerente.html"><img src="../imagens/TOWER_TECH.png" /></a>
-            </div>
-            <div class="menu_fechado">
-              <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
-            </div>
-          </div>
-        </div>
-    
-        <div class="header_desktop">
-          <div class="grid_desktop">
-            <div class="primeira_div">
-              <a href="home_gerente.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="Logo"/></a>
-              <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
-            </div>
-            <div class="cadastro_gerente">
-              <h5>CADASTRO</h5>
-              <a href="./cad_funcionario.html"><button>Cadastrar funcionários</button></a>
-              <a href="./previsao_gerente.html"><button>Previsão de dados</button></a>
-            </div>
-            <div class="localizacaoGerente">
-              <h5>LOCALIZAÇÃO</h5>
-              <div class="scrollLocalizacaoGerente">
-                
-    
-    
-    
-              </div>
-            </div>
-            <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
-          </div>
-        </div>
-      </header>
-
-    <section>
-        <div class="container__dash">
-            
-            <div class="titulo">
-                <h1>PREVISÃO DE DADOS</h1>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./../css/reset.css" />
+        <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+        <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+        <link rel="stylesheet" href="../css/previsao_gerente.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="../JS/navbar.js"></script>
+        <script
+            type="text/javascript"
+            src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"
+        ></script>
+        <script type="text/javascript" src="../JS/funcoes.js"></script>
+        <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+        <script
+            type="text/javascript"
+            src="../JS/graficos_servidor.js"
+        ></script>
+        <title>Previsão gerente</title>
+    </head>
+    <body>
+        <header>
+            <div class="menu">
+                <div class="he-grid">
+                    <div class="logo_menu">
+                        <a href="home_gerente.html"
+                            ><img src="../imagens/TOWER_TECH.png"
+                        /></a>
+                    </div>
+                    <div class="menu_fechado">
+                        <img
+                            src="../imagens/icone_menu.png"
+                            id="menu"
+                            onclick="abrirMenuSistema()"
+                        />
+                    </div>
+                </div>
             </div>
 
-            <div class="graficos">
-              <div class="grafico">
-                <h3>Decolagens por Mês<span id="id_cpu"> </span></h3>
-                <canvas id="canvas_grafico4"></canvas>
-              </div>
-              
-              <div class="grafico">
-                <h3>Quantidade de computadores por Mês<span id="id_disco"> </span></h3>
-                <canvas id="canvas_grafico5"></canvas>
-              </div>
-
-              <div class="grafico">
-                <h3>Chamados no Mês<span id="id_ram"> </span></h3>
-                <canvas id="canvas_grafico6"></canvas>
-              </div>
-
-              <div class="info_botao">
-                <button id="botao_info">Relatórios</button>                      
-              </div>
+            <div class="header_desktop">
+                <div class="grid_desktop">
+                    <div class="primeira_div">
+                        <a href="home_gerente.html" id="logo_menu_desktop"
+                            ><img
+                                src="../imagens/TOWER_TECH.png"
+                                id="logo_menu_desktop"
+                                alt="Logo"
+                        /></a>
+                        <h3>
+                            Bem-vindo(a), <span id="id_nome_usuario"></span>!
+                        </h3>
+                    </div>
+                    <div class="cadastro_gerente">
+                        <h5>CADASTRO</h5>
+                        <a href="./cad_funcionario.html"
+                            ><button>Cadastrar funcionários</button></a
+                        >
+                        <a href="./previsao_gerente.html"
+                            ><button>Previsão de dados</button></a
+                        >
+                    </div>
+                    <div class="localizacaoGerente">
+                        <h5>LOCALIZAÇÃO</h5>
+                        <div class="scrollLocalizacaoGerente"></div>
+                    </div>
+                    <a class="sair" onclick="logoff()"
+                        ><i class="fas fa-sign-out-alt"></i
+                    ></a>
+                </div>
             </div>
+        </header>
 
-            
+        <section>
+            <div class="container__dash">
+                <div class="titulo">
+                    <h1>PREVISÃO DE DADOS</h1>
+                </div>
 
-            <div class="popup_wrapper_info">
-                <div class="popup_info">
-                    <div class="popup_close_info">x</div>
-        
-                    <div class="popup_content_info">
-                        <h2>Relatório</h2>
-                        
-                        <div class="content">
+                <div class="graficos">
+                    <div class="grafico">
+                        <h3>Decolagens por Mês<span id="id_cpu"> </span></h3>
+                        <canvas id="canvas_grafico4"></canvas>
+                    </div>
 
-                            <div class="content_mes">
-                                <h2>Decolagens no mês</h2>
-                                <h3>Previsão Novembro: -4.85%</h3>
-                                <h3>Previsão dezembro: -0,35%</h3>
+                    <div class="grafico">
+                        <h3>
+                            Quantidade de computadores por Mês<span
+                                id="id_disco"
+                            >
+                            </span>
+                        </h3>
+                        <canvas id="canvas_grafico5"></canvas>
+                    </div>
+
+                    <div class="grafico">
+                        <h3>Chamados no Mês<span id="id_ram"> </span></h3>
+                        <canvas id="canvas_grafico6"></canvas>
+                    </div>
+
+                    <div class="info_botao">
+                        <button id="botao_info">Relatórios</button>
+                    </div>
+                </div>
+
+                <div class="popup_wrapper_info">
+                    <div class="popup_info">
+                        <div class="popup_close_info">x</div>
+
+                        <div class="popup_content_info">
+                            <h2>Relatório</h2>
+
+                            <div class="content">
+                                <div class="content_mes">
+                                    <h2>Decolagens no mês</h2>
+                                    <h3>Previsão Novembro: -4.85%</h3>
+                                    <h3>Previsão dezembro: -0,35%</h3>
+                                </div>
+
+                                <div class="content_dados">
+                                    <h2>Computadores no mês</h2>
+                                    <h3>Previsão Novembro: -14.29%</h3>
+                                    <h3>Previsão dezembro: 0%</h3>
+                                </div>
+
+                                <div class="content_custo">
+                                    <h2>Chamados no mês</h2>
+                                    <h3>Previsão Novembro: 23.68%</h3>
+                                    <h3>Previsão dezembro: 0%</h3>
+                                </div>
                             </div>
-
-                            <div class="content_dados">
-                                <h2>Computadores no mês</h2>
-                                <h3>Previsão Novembro: -14.29%</h3>
-                                <h3>Previsão dezembro: 0%</h3>
-                            </div>
-
-                            <div class="content_custo">
-                                <h2>Chamados no mês</h2>
-                                <h3>Previsão Novembro: 23.68%</h3>
-                                <h3>Previsão dezembro: 0%</h3>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-              </div>
-        </div>
-    </section>
-</body>
+            </div>
+        </section>
+    </body>
 </html>
 
 <script>
-    verificar_pagina("G")
-    verificar_autenticacao()
+    verificar_pagina("G");
+    verificar_autenticacao();
 
     function previsaoDecolagemClienteMes(mes) {
-        valorDecolagens = (-4.582*mes) + 1210.800
-        return(valorDecolagens)
+        valorDecolagens = -4.582 * mes + 1210.8;
+        return valorDecolagens;
     }
 
     function previsaoQtdComputadorCliente(decolagem) {
-        qtdComputador = (0.02932*decolagem) + -16.36220
-        return(qtdComputador)
+        qtdComputador = 0.02932 * decolagem + -16.3622;
+        return qtdComputador;
     }
 
     function previsaoChamadosCliente(computador) {
-        chamados = (-1.782*computador) + 79.488
-        return(chamados)
+        chamados = -1.782 * computador + 79.488;
+        return chamados;
     }
 
-    const ctx1 = document.getElementById('canvas_grafico4').getContext('2d');
+    const ctx1 = document.getElementById("canvas_grafico4").getContext("2d");
     const canvas_grafico4 = new Chart(ctx1, {
-        type: 'bar',
+        type: "bar",
         data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            labels: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+            ],
             datasets: [
                 {
-                label: 'Decolagens',
-                data: [1346, 1159, 1211, 1129, 1095, 1079, 1246, 1192, 1180, 1219, 0,0],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ], 
-                    borderWidth: 1
-                },{
-                label: 'Previsão Decolagens',
-                data: [0,0,0,0,0,0,0,0,0,0, previsaoDecolagemClienteMes(11), previsaoDecolagemClienteMes(12)],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)'
-
-                ],
-                    borderWidth: 1
-                }]
-        },
-
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    const ctx2 = document.getElementById('canvas_grafico5').getContext('2d');
-    const canvas_grafico5 = new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            datasets: [{
-                label: 'Qtd Computadores',
-                data: [15, 16, 17, 12, 22, 20, 19, 17, 25, 21, 0, 0],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ], 
-                    borderWidth: 1
+                    label: "Decolagens",
+                    data: [
+                        1346, 1159, 1211, 1129, 1095, 1079, 1246, 1192, 1180,
+                        1219, 0, 0,
+                    ],
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                    ],
+                    borderWidth: 1,
                 },
                 {
-                label: 'Previsão Qtd Computadores',
-                data: [0,0,0,0,0,0,0,0,0,0, previsaoQtdComputadorCliente(1160), previsaoQtdComputadorCliente(1156)],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)'
-
-                ],
-                    borderWidth: 1
-                }]
+                    label: "Previsão Decolagens",
+                    data: [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        previsaoDecolagemClienteMes(11),
+                        previsaoDecolagemClienteMes(12),
+                    ],
+                    backgroundColor: [
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
         },
+
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
-            }
-        }
+                    beginAtZero: true,
+                },
+            },
+        },
     });
 
-    const ctx3 = document.getElementById('canvas_grafico6').getContext('2d');
-    const canvas_grafico6 = new Chart(ctx3, {
-        type: 'bar',
+    const ctx2 = document.getElementById("canvas_grafico5").getContext("2d");
+    const canvas_grafico5 = new Chart(ctx2, {
+        type: "bar",
         data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            datasets: [{
-                label: 'Qtd Chamados',
-                data: [50, 35, 34, 60, 45, 73, 32, 75, 25, 38, 0, 0],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ], 
-                    borderWidth: 1
-                },{
-                label: 'Previsão Qtd Chamados',
-                data: [0,0,0,0,0,0,0,0,0,0, previsaoChamadosCliente(18), previsaoChamadosCliente(18)],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(54, 162, 235, 1)'
-
-                ],
-                    borderWidth: 1
-                }]
+            labels: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+            ],
+            datasets: [
+                {
+                    label: "Qtd Computadores",
+                    data: [15, 16, 17, 12, 22, 20, 19, 17, 25, 21, 0, 0],
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+                {
+                    label: "Previsão Qtd Computadores",
+                    data: [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        previsaoQtdComputadorCliente(1160),
+                        previsaoQtdComputadorCliente(1156),
+                    ],
+                    backgroundColor: [
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
-            }
-        }
+                    beginAtZero: true,
+                },
+            },
+        },
     });
 
+    const ctx3 = document.getElementById("canvas_grafico6").getContext("2d");
+    const canvas_grafico6 = new Chart(ctx3, {
+        type: "bar",
+        data: {
+            labels: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+            ],
+            datasets: [
+                {
+                    label: "Qtd Chamados",
+                    data: [50, 35, 34, 60, 45, 73, 32, 75, 25, 38, 0, 0],
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(255, 99, 132, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(255, 99, 132, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+                {
+                    label: "Previsão Qtd Chamados",
+                    data: [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        previsaoChamadosCliente(18),
+                        previsaoChamadosCliente(18),
+                    ],
+                    backgroundColor: [
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(54, 162, 235, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
 </script>
 
 <script>
-    const button_info = document.querySelector('#botao_info')
+    const button_info = document.querySelector("#botao_info");
 
-    const popup_info = document.querySelector('.popup_wrapper_info')
+    const popup_info = document.querySelector(".popup_wrapper_info");
 
-    const closeButton_info = document.querySelector('.popup_close_info')
+    const closeButton_info = document.querySelector(".popup_close_info");
 
-    button_info.addEventListener('click', () => {
-        popup_info.style.display = 'block'
-    })
+    button_info.addEventListener("click", () => {
+        popup_info.style.display = "block";
+    });
 
-    closeButton_info.addEventListener('click', () => {
-        popup_info.style.display = 'none'
-    })
+    closeButton_info.addEventListener("click", () => {
+        popup_info.style.display = "none";
+    });
 
-    const fkEmpresa = get_fk_empresa()
-    qtdTorre_gerente(fkEmpresa)
+    const fkEmpresa = get_fk_empresa();
+    qtdTorre_gerente(fkEmpresa);
 </script>

@@ -1,166 +1,192 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./../css/reset.css" />
+        <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="./../css/cad_funcionario.css" />
+        <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+        <script src="../JS/navbar.js"></script>
+        <script type="text/javascript" src="../JS/funcoes.js"></script>
+        <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+        <title>Cadastro Funcionário</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./../css/reset.css" />
-  <link rel="stylesheet" href="../css/navbar_sistema2.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./../css/cad_funcionario.css" />
-  <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
-  <script src="../JS/navbar.js"></script>
-  <script type="text/javascript" src="../JS/funcoes.js"></script>
-  <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
-  <title>Cadastro Funcionário</title>
-</head>
+    <body>
+        <header>
+            <div class="menu">
+                <div class="he-grid">
+                    <div class="logo_menu">
+                        <a href="home_gerente.html"
+                            ><img src="../imagens/TOWER_TECH.png"
+                        /></a>
+                    </div>
+                    <div class="menu_fechado">
+                        <img
+                            src="../imagens/icone_menu.png"
+                            id="menu"
+                            onclick="abrirMenuSistema()"
+                        />
+                    </div>
+                </div>
+            </div>
 
-<body>
-  <header>
+            <div class="header_desktop">
+                <div class="grid_desktop">
+                    <div class="primeira_div">
+                        <a href="home_gerente.html" id="logo_menu_desktop"
+                            ><img
+                                src="../imagens/TOWER_TECH.png"
+                                id="logo_menu_desktop"
+                                alt="Logo"
+                        /></a>
+                        <h3>
+                            Bem-vindo(a), <span id="id_nome_usuario"></span>!
+                        </h3>
+                    </div>
+                    <div class="cadastro_gerente">
+                        <h5>CADASTRO</h5>
+                        <a href="./cad_funcionario.html"
+                            ><button>Cadastrar funcionários</button></a
+                        >
+                        <a href="./previsao_gerente.html"
+                            ><button>Previsão de dados</button></a
+                        >
+                    </div>
+                    <div class="localizacaoGerente">
+                        <h5>LOCALIZAÇÃO</h5>
+                        <div class="scrollLocalizacaoGerente"></div>
+                    </div>
+                    <a class="sair" onclick="logoff()"
+                        ><i class="fas fa-sign-out-alt"></i
+                    ></a>
+                </div>
+            </div>
+        </header>
 
-    <div class="menu">
-      <div class="he-grid">
-        <div class="logo_menu">
-          <a href="home_gerente.html"><img src="../imagens/TOWER_TECH.png" /></a>
-        </div>
-        <div class="menu_fechado">
-          <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
-        </div>
-      </div>
-    </div>
-
-    <div class="header_desktop">
-      <div class="grid_desktop">
-        <div class="primeira_div">
-          <a href="home_gerente.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="Logo"/></a>
-          <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
-        </div>
-        <div class="cadastro_gerente">
-          <h5>CADASTRO</h5>
-          <a href="./cad_funcionario.html"><button>Cadastrar funcionários</button></a>
-          <a href="./previsao_gerente.html"><button>Previsão de dados</button></a>
-        </div>
-        <div class="localizacaoGerente">
-          <h5>LOCALIZAÇÃO</h5>
-          <div class="scrollLocalizacaoGerente">
-           
-
-
-
-          </div>
-        </div>
-        <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
-      </div>
-    </div>
-  </header>
-
-  <section>
-    <form id="cad_funcionario" action="" onsubmit="return cadastrar()">
-      <div class="grid">
-        <h2>CADASTRE SEUS FUNCIONÁRIOS</h2>
-        <div class="cm-inputs">
-          <div class="input">
-            <input type="text" name="nome" required />
-            <label for="nome">Nome</label>
-          </div>
-          <div class="input">
-            <input type="text" name="sobrenome" required />
-            <label for="sobrenome">Sobrenome</label>
-          </div>
-          <div class="input">
-            <input type="text" name="email" required />
-            <label for="email">E-mail</label>
-          </div>
-          <div class="input">
-            <input type="password" name="senha" required />
-            <label for="senha">Senha</label>
-          </div>
-          <div class="input">
-            <input type="text" name="cargo" required />
-            <label for="cargo">Cargo</label>
-          </div>
-          <div class="input">
-            <select name="permissao" id="">
-              <option value="" disabled selected>Selecione uma permissão</option>
-              <option value="A">Analista</option>
-              <option value="G">Gerente</option>
-            </select>
-            <label for="permissao">Permissão</label>
-          </div>
-          <div>
-            <input type="text " id="id_fk_empresa" style="display: none;" name="fkEmpresa">
-            <input type="text" style="display: none;" name="idFuncionario" id="idFunc">
-          </div>
-          <div class="btn-maq">
-            <button>ENVIAR</button>
-          </div>
-        </div>
-        
-      </div>
-    </form>
-  </section>
-</body>
-
+        <section>
+            <form id="cad_funcionario" action="" onsubmit="return cadastrar()">
+                <div class="grid">
+                    <h2>CADASTRE SEUS FUNCIONÁRIOS</h2>
+                    <div class="cm-inputs">
+                        <div class="input">
+                            <input type="text" name="nome" required />
+                            <label for="nome">Nome</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" name="sobrenome" required />
+                            <label for="sobrenome">Sobrenome</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" name="email" required />
+                            <label for="email">E-mail</label>
+                        </div>
+                        <div class="input">
+                            <input type="password" name="senha" required />
+                            <label for="senha">Senha</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" name="cargo" required />
+                            <label for="cargo">Cargo</label>
+                        </div>
+                        <div class="input">
+                            <select name="permissao" id="">
+                                <option value="" disabled selected>
+                                    Selecione uma permissão
+                                </option>
+                                <option value="A">Analista</option>
+                                <option value="G">Gerente</option>
+                            </select>
+                            <label for="permissao">Permissão</label>
+                        </div>
+                        <div>
+                            <input
+                                type="text "
+                                id="id_fk_empresa"
+                                style="display: none"
+                                name="fkEmpresa"
+                            />
+                            <input
+                                type="text"
+                                style="display: none"
+                                name="idFuncionario"
+                                id="idFunc"
+                            />
+                        </div>
+                        <div class="btn-maq">
+                            <button>ENVIAR</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
 </html>
 <script>
-  verificar_pagina("G")
-  verificar_autenticacao()
+    verificar_pagina("G");
+    verificar_autenticacao();
 
-  function get_fk_empresa() {
-    var fkEmpresa = sessionStorage.getItem('fk_empresa_meuapp')
-    id_fk_empresa.value = fkEmpresa;
-    return fkEmpresa
-  }
+    function get_fk_empresa() {
+        var fkEmpresa = sessionStorage.getItem("fk_empresa_meuapp");
+        id_fk_empresa.value = fkEmpresa;
+        return fkEmpresa;
+    }
 
-  var fkEmpresa = get_fk_empresa()
-  console.log(fkEmpresa)
-  qtdTorre_gerente(fkEmpresa)
+    var fkEmpresa = get_fk_empresa();
+    console.log(fkEmpresa);
+    qtdTorre_gerente(fkEmpresa);
 
-  function cadastrar() {
-    var formulario = new URLSearchParams(new FormData(cad_funcionario));
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      body: formulario
-    }).then(function (response) {
-
-      if (response.ok) {
-        alert("Usuario cadastrado com sucesso!")
-        window.reload();
-      } else {
-
-        console.log('Erro de cadastro!');
-        response.text().then(function (resposta) {
-          div_erro.innerHTML = resposta;
+    function cadastrar() {
+        var formulario = new URLSearchParams(new FormData(cad_funcionario));
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario,
+        }).then(function (response) {
+            if (response.ok) {
+                alert("Usuario cadastrado com sucesso!");
+                window.reload();
+            } else {
+                console.log("Erro de cadastro!");
+                response.text().then(function (resposta) {
+                    div_erro.innerHTML = resposta;
+                });
+            }
         });
-      }
-    });
 
-    return false;
-  }
+        return false;
+    }
 
-  function get_id_func(fkEmpresa) {
-    fetch(`/usuarios/qtdFuncionario/${fkEmpresa}`, {
-        cache: 'no-store'
-      }).then(function (response) {
+    function get_id_func(fkEmpresa) {
+        fetch(`/usuarios/qtdFuncionario/${fkEmpresa}`, {
+            cache: "no-store",
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(
+                            `Dados recebidos: ${JSON.stringify(resposta)}`
+                        );
+                        console.log(resposta[0].ids);
+                        idFunc.value = resposta[0].ids += 1;
+                    });
+                } else {
+                    console.error("Nenhum dado encontrado ou erro na API");
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
 
-        if (response.ok) {
-          response.json().then(function (resposta) {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            console.log(resposta[0].ids);
-            idFunc.value = resposta[0].ids += 1;
-          });
-        } else {
-          console.error('Nenhum dado encontrado ou erro na API');
-        }
-      })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados: ${error.message}`);
-      });
-
-    return false;
-  }
-  get_id_func(fkEmpresa)
+        return false;
+    }
+    get_id_func(fkEmpresa);
 </script>
