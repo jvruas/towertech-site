@@ -29,7 +29,7 @@ module.exports = {
                 username: "root",
                 password: "urubu100",
                 database: "towertech",
-                host: "ec2-3-82-251-208.compute-1.amazonaws.com",
+                host: "ec2-35-173-135-28.compute-1.amazonaws.com",
                 // port: "3306",
                 dialect: "mysql",
                 xuse_env_variable: "DATABASE_URL",
