@@ -72,10 +72,14 @@ section {
     width: 335px;
 } */
 
-/* .container_grafico canvas{ 
+ .container_grafico canvas{ 
     width: 90%;
     height: 70%;
-} */
+    margin-top: 20px;
+} 
+.container_grafico h3{    
+    margin-top: 20px;
+} 
 
 .historico {
     width: 90%;
@@ -164,7 +168,8 @@ section {
 
     .container_grafico canvas{ 
         width: 80%; 
-        height: 80%;
+        height: 90%;
+        
     }
 }
 
