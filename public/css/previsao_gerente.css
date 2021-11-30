@@ -1,0 +1,233 @@
+body {
+    display: flex;
+}
+
+section {
+    height: 100vh;
+    width: calc(100vw - 328px);
+    overflow: auto; 
+    background-color: #F4F4F4; 
+}
+
+.container__dash {
+    width: 100%;
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo h1 {
+    font-size: 1.8rem;
+    color: #FF7A00;
+    letter-spacing: 1.2px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(163, 163, 163, 0.651);
+    margin-top: 15px;
+}
+
+.graficos {
+    width: 90%;
+    height: 600px; 
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    grid-template-rows: repeat(2, 300px);
+    justify-content: space-between;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.grafico {
+    width: 100%;
+    height: 280px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 12px -1px #707070;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 30px 220px;
+    align-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+}
+
+canvas{
+    width: 85%;
+}
+
+.info_botao {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.info_botao button {
+    height: 35px;
+    width: 200px;
+    background-color: #FF7A00;
+    color: #FFFFFF;
+    border-radius: 5%;
+    border: 0;
+    font-size: 1.3rem;
+}
+
+.popup_wrapper_info {
+    display: none;
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 78%;
+    height: 100vh;
+}
+
+.popup_info {
+    width: 80%;
+    height: 60%;
+    margin: 10% auto;
+    padding: 20px;
+    background: white;
+    position: relative;
+}
+
+.popup_info a {
+    color: white;
+    cursor: pointer;
+    padding: 6px 10px;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.popup_close_info {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    float: right;
+    font-size: 2rem;
+    font-weight: lighter;
+}
+
+.popup_content_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100%;
+}
+
+.popup_content_info h2 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: #FF7A00;
+}
+
+.content {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.content_mes,
+.content_dados,
+.content_custo {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    height: 15%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 12px -1px #707070;
+}
+
+@media (min-width: 1800px) {
+    .graficos {
+        height: 1500px; 
+        grid-template-columns: repeat(2, 48%);
+        grid-template-rows: repeat(2, 650px);
+    }
+    
+    .grafico {
+        height: 650px;
+        display: grid;
+        grid-template-rows: 30px 350px;
+    }
+}
+
+@media (max-width: 1024px) {
+    section {
+        width: calc(100vw - 270px);
+    }
+
+    .grafico__cpu h3,
+    .grafico__disco h3,
+    .grafico__ram h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 950px) {
+    .graficos{
+        margin-top: 130px;
+        height: 1000px; 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 450px);
+    }
+
+    .grafico {
+        height: 410px;
+        grid-template-rows: 30px 370px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    body {
+        flex-direction: column;
+    }
+
+    section {
+        width: 100vw;
+        justify-content: center;
+    }
+
+    .graficos {
+        margin-top: 100px;
+        height: 1200px;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    .titulo h1 {
+        font-size: 1.5rem;
+    }
+
+    .info_servidor {
+        flex-direction: column;
+    }
+
+    .grafico {
+        height: 350px;
+        grid-template-rows: 30px 250px;
+    }
+
+    .graficos {
+        margin-top: 0;
+        height: 1300px;
+    }
+}

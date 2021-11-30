@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./../css/reset.css" />
+        <link rel="stylesheet" href="./../css/cad_maquina.css" />
+        <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+        <script src="../JS/navbar.js"></script>
+        <script type="text/javascript" src="../JS/funcoes.js"></script>
+        <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+        <title>Cadastro Máquina</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="menu">
+                <div class="he-grid">
+                    <div class="logo_menu">
+                        <a href="home_analista.html"><img  src="../imagens/TOWER_TECH.png" /></a>
+                    </div>
+                    <div class="menu_fechado">
+                        <img
+                            src="../imagens/icone_menu.png"
+                            id="menu"
+                            onclick="abrirMenuSistema()"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="header_desktop">
+                <div class="grid_desktop">
+                    <div class="primeira_div">
+                        <a href="home_analista.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="" /></a>
+                        <h3>
+                            Bem-vindo(a), <span id="id_nome_usuario"></span>!
+                        </h3>
+                    </div>
+                    <div class="cadastro">
+                        <h5>CADASTRO</h5>
+                        <a href="./cad_maquina.html"
+                            ><button>Cadastrar máquinas</button></a
+                        >
+                    </div>
+                    <div class="localizacao">
+                        <h5>LOCALIZAÇÃO</h5>
+                        <div class="scrollLocalizacao"></div>
+                    </div>
+                    <a class="sair" onclick="logoff()"
+                        ><i class="fas fa-sign-out-alt"></i
+                    ></a>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <form id="cad_maquina" action="" onsubmit=" return cadastrar()">
+                <div class="grid">
+                    <h2>CADASTRE SUAS MÁQUINAS</h2>
+                    <div class="cm-inputs">
+                        <div class="input">
+                            <input name="name_marca" type="text" required />
+                            <label for="name_marca">Marca</label>
+                        </div>
+                        <div class="input">
+                            <input name="name_modelo" type="text" required />
+                            <label for="name_modelo">Modelo</label>
+                        </div>
+                        <div class="input">
+                            <input name="name_nmr_serie" type="text" required />
+                            <label for="name_nmr_serie">Número de série</label>
+                        </div>
+                        <div class="input">
+                            <input name="name_cpu" type="text" required />
+                            <label for="name_cpu">Nome do processador</label>
+                        </div>
+                        <div class="input">
+                            <input
+                                name="name_mem_ram"
+                                type="number"
+                                min="0"
+                                required
+                            />
+                            <label for="name_mem_ram"
+                                >Capacidade RAM (Gb)</label
+                            >
+                        </div>
+                        <div class="input">
+                            <input
+                                name="name_disco"
+                                type="number"
+                                min="0"
+                                required
+                            />
+                            <label for="name_disco"
+                                >Capacidade Disco (Gb)</label
+                            >
+                        </div>
+                        <div class="input">
+                            <select
+                                class="inputs"
+                                name="torre"
+                                id="id_torre"
+                                onchange="get_id_comp(this.value)"
+                            >
+                                <option class="option" value="">
+                                    Selecione a torre
+                                </option>
+                            </select>
+                            <label for="torre">Torre</label>
+                            <input
+                                type="text"
+                                style="display: none"
+                                name="idComputador"
+                                id="idComp"
+                            />
+                        </div>
+                        <div class="btn-maq">
+                            <button>ENVIAR</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>
+
+<script>
+    verificar_pagina("A")
+    verificar_autenticacao();
+    var fkEmpresa = get_fk_empresa();
+
+    function cadastrar() {
+        var formulario = new URLSearchParams(new FormData(cad_maquina));
+        fetch(`/usuarios/cadastrarComputador/${fkEmpresa}`, {
+            method: "POST",
+            body: formulario,
+        }).then(function (response) {
+            if (response.ok) {
+                alert("Maquina cadastrada com sucesso!");
+                location.reload();
+            } else {
+                console.log("Erro de cadastro!");
+                response.text().then(function (resposta) {
+                    div_erro.innerHTML = resposta;
+                });
+            }
+        });
+
+        return false;
+    }
+
+    function get_id_comp(torre) {
+        fetch(`/usuarios/idComputador/${torre}`, {
+            cache: "no-store",
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(
+                            `Dados recebidos: ${JSON.stringify(resposta)}`
+                        );
+                        console.log(resposta[0].ids);
+                        idComp.value = resposta[0].ids += 1;
+                    });
+                } else {
+                    console.error("Nenhum dado encontrado ou erro na API");
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+
+        return false;
+    }
+
+    function qtdTorreForm(fkEmpresa) {
+        fetch(`/usuarios/qtdTorres/${fkEmpresa}`, {
+            cache: "no-store",
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(
+                            `Dados recebidos: ${JSON.stringify(resposta)}`
+                        );
+                        console.log(resposta);
+                        for (var i = 0; i < resposta.length; i++) {
+                            id_torre.innerHTML += `<option class="option" value="${resposta[i].idTorre}">${resposta[i].nomeTorre}</option>`;
+                        }
+                    });
+                } else {
+                    console.error("Nenhum dado encontrado ou erro na API");
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+
+        return false;
+    }
+    qtdTorreForm(fkEmpresa);
+    qtdTorre(get_fk_empresa());
+    setTimeout(() => {
+        qtdComputadoreNavBar(get_fk_empresa());
+    }, 1000);
+</script>

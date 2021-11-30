@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./../css/reset.css" />
+  <link rel="stylesheet" href="../css/dash_gerente.css" />
+  <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+  <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../JS/navbar.js"></script>
+  <script type="text/javascript" src="../JS/funcoes.js"></script>
+  <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+  <title>Dashboard Gerente</title>
+</head>
+
+<body>
+  <header>
+
+    <div class="menu">
+      <div class="he-grid">
+        <div class="logo_menu">
+          <a href="home_gerente.html"><img src="../imagens/TOWER_TECH.png" /></a>
+        </div>
+        <div class="menu_fechado">
+          <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
+        </div>
+      </div>
+    </div>
+
+    <div class="header_desktop">
+      <div class="grid_desktop">
+        <div class="primeira_div">
+          <a href="home_gerente.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="Logo"/></a>
+          <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
+        </div>
+        <div class="cadastro_gerente">
+          <h5>CADASTRO</h5>
+          <a href="./cad_funcionario.html"><button>Cadastrar funcionários</button></a>
+          <a href="./previsao_gerente.html"><button>Previsão de dados</button></a>
+        </div>
+        <div class="localizacaoGerente">
+          <h5>LOCALIZAÇÃO</h5>
+          <div class="scrollLocalizacaoGerente">
+            
+
+
+
+          </div>
+        </div>
+        <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container__dashboard">
+
+      <div class="nome_equipe">
+        <h1 id="nomeTorre"></h1>
+      </div>
+
+      <div class="graficos">
+        <div class="grafico">
+          <div class="container_grafico">
+            <h3>CHAMADOS MENSAIS</h3>
+            <canvas id="grafico_barra_mensal"></canvas>
+          </div>
+        </div>
+
+        <div class="grafico">
+          <div class="container_grafico">
+            <h3>CHAMADOS POR TURNO</h3>
+            <canvas id="grafico_barra_turno"  ></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="historico">
+        <h2>HISTÓRICO DE CHAMADOS</h2>
+        <div class="historico_titulos">
+          <h3>Localização</h3>
+          <h3>Data de abertura</h3>
+          <h3>Data de conclusão</h3>
+          <h3>Status</h3>
+        </div>
+        <div class="grid_chamados">
+        </div>
+    </div>
+  </section>
+</body>
+
+</html>
+
+<script>
+  verificar_pagina("G")
+  verificar_autenticacao()
+  // Grafico chamados anual
+  const barChart = document
+    .getElementById("grafico_barra_mensal")
+    .getContext("2d");
+
+  var listaAbertos =  []
+  var listaFechados =  []
+
+  var listaAbertos2 =  []
+  var listaFechados2 =  []
+
+  const dataBarChart = {
+    labels: [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ],
+    datasets: [{
+        label: "Quantidade de Chamados Não Finalizados",
+        data: listaAbertos,
+        backgroundColor: "rgba(133, 24, 42)",
+      },
+      {
+        label: "Quantidade de Chamados Finalizados",
+        data: listaFechados,
+        backgroundColor: "rgba(0, 180, 216)",
+      },
+    ],
+  };
+
+  const chartConfiguration = {
+    type: "bar",
+    data: dataBarChart,
+    options: { maintainAspectRatio: false },
+  };
+
+  
+
+  // Gráfico turnos
+  const barChart2 = document
+    .getElementById("grafico_barra_turno")
+    .getContext("2d");
+
+
+
+
+  const dataBarChart2 = {
+    labels: ["Manhã", "Tarde", "Noite"],
+    datasets: [{
+        label: "Quantidade de Chamados Não Finalizados",
+        data: listaAbertos2,
+        backgroundColor: "rgba(133, 24, 42)",
+      },
+      {
+        label: "Quantidade de Chamados Finalizados",
+        data: listaFechados2,
+        backgroundColor: "rgba(0, 180, 216)",
+      },
+    ],
+  };
+
+  const chartConfiguration2 = {
+    type: "bar",
+    data: dataBarChart2,
+    options: { maintainAspectRatio: false },
+  };
+
+
+
+
+  function queryString(parameter) {
+    var loc = location.search.substring(1, location.search.length);
+    var param_value = false;
+    var params = loc.split("&");
+    for (i = 0; i < params.length; i++) {
+      param_name = params[i].substring(0, params[i].indexOf('='));
+      if (param_name == parameter) {
+        param_value = params[i].substring(params[i].indexOf('=') + 1)
+      }
+    }
+    if (param_value) {
+      return param_value;
+    } else {
+      return undefined;
+    }
+  }
+
+  var fkTorre = queryString("minhaVariavel");
+  console.log(fkTorre);
+  var nome_torre;
+
+  function get_nome_torre(fkTorre, fkEmpresa) {
+    fetch(`/chamados/getNomeTorre/${fkTorre}/${fkEmpresa}`, {
+        cache: 'no-store'
+      }).then(function (response) {
+
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(resposta[0].nomeTorre);
+           
+            nome_torre = resposta[0].nomeTorre;
+            nomeTorre.innerHTML = `EQUIPE - ${nome_torre}`
+            
+
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados: ${error.message}`);
+      });
+
+    return false;
+  }
+
+  const aberto = "aberto";
+  const fechado = "fechado"
+
+
+  
+  var fkEmpresa = get_fk_empresa();
+
+  window.onload = function () {
+    getChamadosAbertos(1, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(2, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(3, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(4, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(5, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(6, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(7, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(8, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(9, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(10, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(11, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(12, fkTorre, fkEmpresa, aberto)
+    getChamadosAbertos(1, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(2, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(3, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(4, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(5, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(6, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(7, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(8, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(9, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(10, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(11, fkTorre, fkEmpresa, fechado)
+    getChamadosAbertos(12, fkTorre, fkEmpresa, fechado)
+
+    getChamadosTurnos(1, fkTorre, fkEmpresa, aberto)
+    getChamadosTurnos(2, fkTorre, fkEmpresa, aberto)
+    getChamadosTurnos(3, fkTorre, fkEmpresa, aberto)
+    getChamadosTurnos(1, fkTorre, fkEmpresa, fechado)
+    getChamadosTurnos(2, fkTorre, fkEmpresa, fechado)
+    getChamadosTurnos(3, fkTorre, fkEmpresa, fechado)
+    
+    
+    
+  }
+
+  setTimeout(() => {  const createBarChart = new Chart(barChart, chartConfiguration) }, 2000);
+  setTimeout(() => {  const createBarChart2 = new Chart(barChart2, chartConfiguration2); }, 2000);
+
+
+
+  qtdTorre_gerente(fkEmpresa)
+  get_nome_torre(fkTorre, fkEmpresa);
+  console.log(nome_torre)
+  setTimeout(() => {  getChamados1(fkTorre, fkEmpresa, nome_torre) }, 1000);
+  console.log(listaAbertos)
+  console.log(listaFechados)
+  
+ 
+  
+</script>

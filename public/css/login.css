@@ -1,0 +1,181 @@
+section{
+    width: 100%;
+    height: calc(100vh - 60px - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
+    /*background-image: url(../imagens/mapa-1.png);
+    background-repeat: no-repeat;
+    background-size: cover;*/
+}   
+
+form{
+    width: 423px;
+    height: 415px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.97);
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.13);
+    border-radius: 10px;
+}
+
+.lo-grid{
+    width: 90%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+}
+
+.lo-logo{
+    height: 20%;
+    padding-top: 30px;
+}
+
+.lo-grid img{
+    width: 150px;
+    
+}
+
+.inputs{
+    width: 110%;
+    height: 40%;   
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.input{
+    position: relative;
+    width: 90%;
+    height: 50px;
+}
+
+.input input{
+    position: relative;
+    box-shadow: inset 1px 1px 3px 2px rgba(0, 0, 0, 0.185);
+    background: #FEFEFE;
+    border-radius: 5px;
+    width: 100%;
+    height: 5rem;
+    border: 1px solid rgba(0, 0, 0, 0.021);
+    outline: none;
+    font-size: 1.5rem;
+    padding-left: 9px;
+    transition: .2s;
+}
+
+.input input{
+    padding-top: 1.0rem;
+}
+
+.input label{
+    position: absolute;
+    top: 30%;
+    left: 10px;
+    font-size: 1.5rem;
+    color: #8C8C8C;
+    transition: .2s;
+}
+
+.input input:focus ~ label,
+.input input:valid ~ label{
+    top: 10%;
+    font-size: 1.3rem;
+    color: blue;
+    font-weight: 700;
+}
+
+.input input:valid{
+    background-color: rgb(244, 253, 255);
+}
+
+.esqueceu-senha{
+    width: 100%;
+    height: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.esqueceu-senha a{
+    font-size: 1.3rem;
+    color: #646464;
+    text-decoration: none;
+}
+
+#verificacao{
+    width: 100%;
+    height: 13%;
+}
+
+#login button{
+    width: 100%;
+    height: 45px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    background: #FF7A00;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    border: none; 
+}
+
+@media (max-width:885px) {
+    #cad_empresa h2{
+        font-size: 1.7rem;
+    }
+    
+    .input label,
+    #login button{
+        font-size: 1.45rem;
+    }
+
+    .input input:focus ~ label, 
+    .input input:valid ~ label, 
+    .input textarea:focus ~ label, 
+    .input textarea:valid ~ label {
+      font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px){
+    .input label,
+    #login button{
+        font-size: 1.40rem;
+    }
+
+}
+
+@media (max-width: 500px){
+    form{
+        width: 90%;
+    }
+}
+
+@media (max-width: 425px) {
+    section{
+        overflow: hidden;
+    }
+    
+    form{
+        width: 100vw;
+        height: 100%;
+        border-radius: 0;
+    }  
+
+    .lo-grid {
+        width: 90%;
+        height: 450px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+}

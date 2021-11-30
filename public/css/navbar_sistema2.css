@@ -1,0 +1,298 @@
+:root{
+    --btn-cadastro: #F89941;
+    --btn-hover: #FF7A00;
+    --background-menu-lateral: #9BB0D3;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+.header_desktop {
+    width: 328px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-color: var(--background-menu-lateral);
+}
+
+.grid_desktop {
+    width: 90%;
+    height: 95%;
+    min-height: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+.primeira_div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.primeira_div img{
+    width: 100%;
+    filter: drop-shadow(2px 2px 2px #3f3f3f);
+    padding-bottom: 15px;
+}
+
+.primeira_div h3{
+    font-size: 1.4rem;
+    padding-bottom: 15px;
+}
+
+.cadastro,
+.cadastro_gerente,
+.cadastro_servidor {
+    margin-top: 10px;
+    width: 100%;
+    border-top: 1px solid white;
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro button,
+.cadastro_gerente button,
+.cadastro_servidor button {
+    height: 40px;
+    width: 100%;
+    background-color: #F89941;
+    font-weight: bold;
+    border: none;
+    font-size: 1.3rem;
+    margin-top: 1%;
+}
+
+h5 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 650;
+    margin-top: 1.5%;
+}
+
+.localizacao {
+    height: calc(100vh - 7% - 40px - 1.2rem - 150px);
+    border-top: solid 1px white;
+    margin-top: 15px;
+}
+
+
+.scrollLocalizacao {
+    overflow: auto;
+    margin-top: 1%;
+    height: calc(98% - 1.5% - 1.2rem - 20px);
+    box-shadow: inset 0px 0px 14px -2px rgba(255,250,250,0.26);
+}
+
+.localizacaoGerente {
+    height: calc(100vh - 7% - 40px - 1.2rem - 192px);
+    border-top: solid 1px white;
+    margin-top: 15px;
+}
+
+.scrollLocalizacaoGerente{
+    overflow: auto;
+    margin-top: 1%;
+    height: calc(98% - 1.5% - 1.2rem - 20px);
+    box-shadow: inset 0px 0px 14px -2px rgba(255,250,250,0.26);
+}
+
+
+.info_Servidor {
+    height: calc(100vh - 7% - 40px - 1.2rem - 210px);
+    border-top: solid 1px white;
+    margin-top: 15px;
+}
+
+.scrollInfoServidor{
+    overflow: auto;
+    margin-top: 1%;
+    height: calc(98% - 1.5% - 1.2rem - 20px);
+    box-shadow: inset 0px 0px 14px -2px rgba(255,250,250,0.26);
+}
+
+.torres {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4%;
+    background-color: #CBD8EC;
+    margin-top: 2%;
+}
+
+.gerente:hover {
+    background-color: var(--btn-cadastro);
+}
+
+.a1 {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.a1 i {
+    color: black;
+}
+
+.torres h3,
+.fas fa-angle-down {
+    font: bold;
+    font-size: 1.3rem;
+    color: black;
+}
+
+.summary_menu {
+    height: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.maquina {
+    width: 100%;
+    height: 40px;
+    background-color: #E6E9EF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.maquina p {
+    font-weight: bold;
+}
+
+summary::marker {
+    font-size: 0px;
+}
+
+details[open] i {
+    transform: rotate(180deg);
+}
+
+.maquina:hover {
+    background-color: var(--btn-hover);
+}
+
+.sair i {
+    float: right;
+    font-size: 20px;
+    color: white;
+    margin-top: 15px;
+}
+
+.menu {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .grid i {
+        margin-bottom: 10px;
+    }
+
+    .header_desktop {
+        width: 270px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        width: 100wv;
+        height: 60px;
+        background-color: #32496F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header_desktop {
+        height: calc(100vh - 60px);
+        width: 100vw;
+        text-align: -webkit-center;
+        display: none;
+    }
+
+    .he-grid {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo_menu img {
+        width: 100%;
+    }
+
+    .logo_menu {
+        width: 14.4rem;
+    }
+
+    .menu_fechado {
+        width: 15%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #iconMenu {
+        width: 25px;
+        display: block;
+    }
+
+
+    #logo_menu_desktop {
+        display: none;
+    }
+
+    .logo_menu {
+        width: 14.4rem;
+    }
+
+    .primeira_div{
+        height: 50px;
+    }
+
+    .primeira_div h3{
+        padding: 7px;
+    }
+    
+
+    header {
+        display: block;
+    }
+
+    .cadastro {
+        height: 80px;
+    }
+
+    .cadastro_gerente {
+        height: 120px;
+    }
+
+    .cadastro_servidor{
+        height: 170px;
+    }
+
+    .localizacao {
+        height: calc(100vh - 7% - 40px - 1.2rem - 100px - 62px);
+    }
+
+    .scrollLocalizacao {
+        height: calc(98% - 5.5% - 1.2rem);
+    }
+
+    .localizacaoGerente {
+        height: calc(100vh - 7% - 40px - 1.2rem - 210px);
+    }
+
+    .info_Servidor {
+        height: calc(100vh - 7% - 40px - 1.2rem - 210px);
+    }
+    
+}

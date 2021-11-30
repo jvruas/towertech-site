@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./../css/reset.css" />
+        <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+        <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+        <link rel="stylesheet" href="../css/home_root.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="../JS/navbar.js"></script>
+        <script type="text/javascript" src="../JS/funcoes.js"></script>
+        <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>Home Root</title>
+    </head>
+    <body>
+        <header>
+            <div class="menu">
+                <div class="he-grid">
+                    <div class="logo_menu">
+                        <a href="home_root.html"><img  src="../imagens/TOWER_TECH.png" /></a>
+                    </div>
+
+                    <div class="menu_fechado">
+                        <img
+                            src="../imagens/icone_menu.png"
+                            id="menu"
+                            onclick="abrirMenuSistema()"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="header_desktop">
+                <div class="grid_desktop">
+                    <div class="primeira_div">
+                        <a href="home_root.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="" /></a>
+                        <h3>
+                            Bem-vindo(a), <span id="id_nome_usuario"></span>!
+                        </h3>
+                    </div>
+                    <div class="cadastro_servidor">
+                        <h5>CADASTRO</h5>
+                        <a href="./cad_empresa.html"
+                            ><button>Cadastrar empresas</button></a
+                        >
+                        <a href="./cad_torre.html"
+                            ><button>Cadastrar torres</button></a
+                        >
+                        <a href="./previsao_root.html"
+                            ><button>Precisão de dados</button></a
+                        >
+                    </div>
+                    <div class="info_Servidor">
+                        <h5>LOCALIZAÇÃO</h5>
+                        <div class="scrollInfoServidor">
+                            <div class="torres">
+                                <div class="a1">
+                                    <h3 onclick="get_pagina_servidor()">Servidor AWS</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="sair" onclick="logoff()"
+                        ><i class="fas fa-sign-out-alt"></i
+                    ></a>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="container__root">
+                <div class="titulo">
+                    <h1>Quantidade de Cadastros</h1>
+                </div>
+
+                <div class="container_info">
+                    <div class="linha1">
+                        <div class="info_empresa">
+                            <div class="info_titulo">
+                                <h2>Empresas</h2>
+                            </div>
+
+                            <div class="info_conteudo">
+                                <img src="../imagens/escritorio.png" alt="" />
+                                <h3 id="qtdEmpresas">XXX</h3>
+                            </div>
+
+                            <div class="info_botao">
+                                <button id="botao_empresa">+</button>
+                            </div>
+                        </div>
+
+                        <div class="info_torre">
+                            <div class="info_titulo">
+                                <h2>Torres</h2>
+                            </div>
+
+                            <div class="info_conteudo">
+                                <img src="../imagens/torre.png" alt="" />
+                                <h3 id="qtdTorres">XXX</h3>
+                            </div>
+
+                            <div class="info_botao">
+                                <button id="botao_torre">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="linha2">
+                        <div class="info_usuario">
+                            <div class="info_titulo">
+                                <h2>Usuários</h2>
+                            </div>
+
+                            <div class="info_conteudo">
+                                <img src="../imagens/usuario.png" alt="" />
+                                <h3 id="qtdUsuarios">XXX</h3>
+                            </div>
+
+                            <div class="info_botao">
+                                <button id="botao_usuario">+</button>
+                            </div>
+                        </div>
+
+                        <div class="info_maquina">
+                            <div class="info_titulo">
+                                <h2>Computadores</h2>
+                            </div>
+
+                            <div class="info_conteudo">
+                                <img src="../imagens/computador.png" alt="" />
+                                <h3 id="qtdComputadores">XXX</h3>
+                            </div>
+
+                            <div class="info_botao">
+                                <button id="botao_maquina">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup_wrapper_empresa">
+                    <div class="popup_empresa">
+                        <div class="popup_close_empresa">x</div>
+
+                        <div class="popup_content_empresa">
+                            <h2>Empresa</h2>
+
+                            <div class="select_ano">
+                                <select name="empresa_ano" id="empresa_ano">
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                            </div>
+
+                            <div class="graph">
+                                <canvas id="chartBarEmpresa"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup_wrapper_torre">
+                    <div class="popup_torre">
+                        <div class="popup_close_torre">x</div>
+
+                        <div class="popup_content_torre">
+                            <h2>Torre</h2>
+
+                            <div class="select_ano">
+                                <select name="empresa_ano" id="empresa_ano">
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                            </div>
+
+                            <div class="graph">
+                                <canvas id="chartBarTorre"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup_wrapper_usuario">
+                    <div class="popup_usuario">
+                        <div class="popup_close_usuario">x</div>
+
+                        <div class="popup_content_usuario">
+                            <h2>Usuário</h2>
+
+                            <div class="select_ano">
+                                <select name="empresa_ano" id="empresa_ano">
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                            </div>
+
+                            <div class="graph">
+                                <canvas id="chartBarUsuario"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup_wrapper_maquina">
+                    <div class="popup_maquina">
+                        <div class="popup_close_maquina">x</div>
+
+                        <div class="popup_content_maquina">
+                            <h2>Computador</h2>
+
+                            <div class="select_ano">
+                                <select name="empresa_ano" id="empresa_ano">
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                            </div>
+
+                            <div class="graph">
+                                <canvas id="chartBarMaquina"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+
+<script>
+    verificar_pagina("R")
+    verificar_autenticacao();
+    // GRAFICO EMPRESAS
+    const labelsBarEmpresa = [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Out",
+        "Nov",
+        "Dez",
+    ];
+
+    const dataBarEmpresa = {
+        labels: labelsBarEmpresa,
+        datasets: [
+            {
+                label: "Quantidade de empresas cadastradas no mês",
+                backgroundColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderWidth: 1,
+                data: [1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 1],
+            },
+        ],
+    };
+
+    // Configurações do gráfico Barras
+    const configBarEmpresa = {
+        type: "bar",
+        data: dataBarEmpresa,
+        options: { maintainAspectRatio: false },
+    };
+
+    var chartBarEmpresa = new Chart(
+        document.getElementById("chartBarEmpresa"),
+        configBarEmpresa
+    );
+
+    // GRAFICO TORRE
+    const labelsBarTorre = [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Out",
+        "Nov",
+        "Dez",
+    ];
+
+    const dataBarTorre = {
+        labels: labelsBarTorre,
+        datasets: [
+            {
+                label: "Quantidade de torres cadastradas no mês",
+                backgroundColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderWidth: 1,
+                data: [7, 4, 3, 3, 4, 7, 6, 1, 6, 4, 8, 10],
+            },
+        ],
+    };
+
+    // Configurações do gráfico Barras
+    const configBarTorre = {
+        type: "bar",
+        data: dataBarTorre,
+        options: { maintainAspectRatio: false },
+    };
+
+    var chartBarTorre = new Chart(
+        document.getElementById("chartBarTorre"),
+        configBarTorre
+    );
+
+    // GRAFICO USUÁRIO
+    const labelsBarUsuario = [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Out",
+        "Nov",
+        "Dez",
+    ];
+
+    const dataBarUsuario = {
+        labels: labelsBarUsuario,
+        datasets: [
+            {
+                label: "Quantidade de usuarios cadastradas no mês",
+                backgroundColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderWidth: 1,
+                data: [18, 9, 3, 5, 7, 21, 19, 2, 8, 6, 24, 32],
+            },
+        ],
+    };
+
+    // Configurações do gráfico Barras
+    const configBarUsuario = {
+        type: "bar",
+        data: dataBarUsuario,
+        options: { maintainAspectRatio: false },
+    };
+
+    var chartBarUsuario = new Chart(
+        document.getElementById("chartBarUsuario"),
+        configBarUsuario
+    );
+
+    // GRAFICO MAQUINA
+    const labelsBarMaquina = [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Out",
+        "Nov",
+        "Dez",
+    ];
+
+    const dataBarMaquina = {
+        labels: labelsBarMaquina,
+        datasets: [
+            {
+                label: "Quantidade de máquinas cadastradas no mês",
+                backgroundColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderColor: [
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                    "rgb(68, 114, 196)",
+                ],
+                borderWidth: 1,
+                data: [30, 12, 6, 7, 9, 21, 18, 3, 24, 8, 35, 30],
+            },
+        ],
+    };
+
+    // Configurações do gráfico Barras
+    const configBarMaquina = {
+        type: "bar",
+        data: dataBarMaquina,
+        options: { maintainAspectRatio: false },
+    };
+
+    var chartBarMaquina = new Chart(
+        document.getElementById("chartBarMaquina"),
+        configBarMaquina
+    );
+</script>
+
+<script>
+    const button_empresa = document.querySelector("#botao_empresa");
+    const button_torre = document.querySelector("#botao_torre");
+    const button_usuario = document.querySelector("#botao_usuario");
+    const button_maquina = document.querySelector("#botao_maquina");
+
+    const popup_empresa = document.querySelector(".popup_wrapper_empresa");
+    const popup_torre = document.querySelector(".popup_wrapper_torre");
+    const popup_usuario = document.querySelector(".popup_wrapper_usuario");
+    const popup_maquina = document.querySelector(".popup_wrapper_maquina");
+
+    const closeButton_empresa = document.querySelector(".popup_close_empresa");
+    const closeButton_torre = document.querySelector(".popup_close_torre");
+    const closeButton_usuario = document.querySelector(".popup_close_usuario");
+    const closeButton_maquina = document.querySelector(".popup_close_maquina");
+
+    button_empresa.addEventListener("click", () => {
+        popup_empresa.style.display = "block";
+    });
+
+    button_torre.addEventListener("click", () => {
+        popup_torre.style.display = "block";
+    });
+
+    button_usuario.addEventListener("click", () => {
+        popup_usuario.style.display = "block";
+    });
+
+    button_maquina.addEventListener("click", () => {
+        popup_maquina.style.display = "block";
+    });
+
+    closeButton_empresa.addEventListener("click", () => {
+        popup_empresa.style.display = "none";
+    });
+
+    closeButton_torre.addEventListener("click", () => {
+        popup_torre.style.display = "none";
+    });
+
+    closeButton_usuario.addEventListener("click", () => {
+        popup_usuario.style.display = "none";
+    });
+
+    closeButton_maquina.addEventListener("click", () => {
+        popup_maquina.style.display = "none";
+    });
+</script>
+
+<script>
+    function obterInformacoes(par) {
+        console.log("executei obter informações gerais");
+        fetch(`/servidores/getInfos/${par}`, { cache: "no-store" })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(
+                            `Dados recebidos: ${JSON.stringify(resposta)}`
+                        );
+
+                        if (par == 1) {
+                            qtdEmpresas.innerHTML = resposta.idEmpresa;
+                        } else if (par == 2) {
+                            qtdTorres.innerHTML = resposta.idTorre;
+                        } else if (par == 3) {
+                            qtdUsuarios.innerHTML = resposta.idFunc;
+                        } else {
+                            qtdComputadores.innerHTML = resposta.idComp;
+                        }
+                    });
+                } else {
+                    console.error("Nenhum dado encontrado ou erro na API");
+                }
+            })
+            .catch(function (error) {
+                console.error(
+                    `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+                );
+            });
+    }
+    obterInformacoes(1);
+    obterInformacoes(2);
+    obterInformacoes(3);
+    obterInformacoes(4);
+</script>

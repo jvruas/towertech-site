@@ -1,0 +1,174 @@
+body {
+    display: flex;
+}
+
+section {
+    height: 100vh;
+    width: calc(100vw - 328px);
+    overflow: auto;
+    background-color: #F4F4F4; 
+}
+
+.container__dash {
+    width: 100%;
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.servidor {
+    background-color: #FFFFFF;
+    width: 90%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 15px;
+}
+
+.titulo h1 {
+    font-size: 1.8rem;
+    color: #FF7A00;
+    letter-spacing: 1.2px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(163, 163, 163, 0.651);
+}
+
+.info_servidor{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info_servidor h3{
+    font-weight: bolder;
+}
+
+.localizacao_servidor,
+.status_servidor {
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.localizacao_servidor {
+    width: 200px;
+}
+
+.status_servidor {
+    display: flex;
+    align-items: center;
+    width: 200px;
+}
+
+.conexao {
+    background-color: green;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+
+.graficos {
+    width: 90%;
+    height: 600px; 
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    grid-template-rows: repeat(2, 300px);
+    justify-content: space-between;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.grafico {
+    width: 100%;
+    height: 280px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 12px -1px #707070;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 30px 220px;
+    align-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+}
+
+canvas{
+    width: 85%;
+    margin-bottom: 35px;
+}
+
+@media (min-width: 1800px) {
+    .graficos {
+        height: 900px; 
+        grid-template-columns: repeat(2, 48%);
+        grid-template-rows: repeat(2, 450px);
+    }
+    
+    .grafico {
+        height: 410px;
+        display: grid;
+        grid-template-rows: 30px 340px;
+    }
+}
+
+@media (max-width: 1024px) {
+    section {
+        width: calc(100vw - 270px);
+    }
+
+    .grafico__cpu h3,
+    .grafico__disco h3,
+    .grafico__ram h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 950px) {
+    .graficos{
+        margin-top: 130px;
+        height: 600px; 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 280px);
+    }
+
+    .grafico {
+        height: 260px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    body {
+        flex-direction: column;
+    }
+
+    section {
+        width: 100vw;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    .titulo h1 {
+        font-size: 1.8rem;
+    }
+
+    .info_servidor {
+        flex-direction: column;
+        text-align: start;
+    }
+
+}
+

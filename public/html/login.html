@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+  <script src="../JS/navbar.js"></script>
+  <title>Login</title>
+</head>
+
+<body>
+  <header>
+    <div class="menu">
+      <div class="he-grid">
+        <div class="logo_menu">
+          <img src="../imagens/TOWER_TECH.png" />
+        </div>
+        <div class="menu_fechado">
+          <img src="../imagens/icone_menu.png" id="iconMenu" onclick="abrirMenu()" />
+          <ul>
+            <li><a href="../html/index.html">HOME</a></li>
+            <li><a href="../html/contato.html">CONTATO</a></li>
+            <li><a href="../html/login.html">LOGIN</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu_aberto">
+      <ul>
+        <li><a href="../html/index.html">HOME</a></li>
+        <li><a href="../html/contato.html">CONTATO</a></li>
+        <li><a href="../html/login.html">LOGIN</a></li>
+      </ul>
+      <div>
+
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <form id="login" action="" onsubmit="return entrar()">
+      <div class="lo-grid">
+        <div class="lo-logo">
+          <img src="../imagens/logo_towertech_preta.svg" alt="Logo" />
+        </div>
+        <div class="inputs">
+          <div class="input">
+            <input type="text" name="email" required />
+            <label for="email">E-mail</label>
+          </div>
+          <div class="input">
+            <input type="password" name="senha" required />
+            <label for="senha">Senha</label>
+          </div>
+        </div>
+        <div class="esqueceu-senha">
+          <a href="#">
+            <p>Esqueceu a senha?</p>
+          </a>
+        </div>
+        <div id="verificacao">
+
+        </div>
+        <button>LOGIN</button>
+      </div>
+    </form>
+  </section>
+
+  <footer class="footer">
+    Todos os direitos reservados - Tower Tech 2021 ©
+  </footer>
+</body>
+
+</html>
+
+<script>
+  function entrar() {
+    var formulario = new URLSearchParams(new FormData(login));
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      body: formulario
+    }).then(resposta => {
+
+      if (resposta.ok) {
+
+        resposta.json().then(json => {
+
+          sessionStorage.login_usuario_meuapp = json.email;
+          sessionStorage.nome_usuario_meuapp = json.nomeFuncionario;
+          sessionStorage.fk_empresa_meuapp = json.fkEmpresa;
+          sessionStorage.permissao_meuapp = json.permissao;
+
+          if (json.permissao == "G") {
+            window.location = "./home_gerente.html"
+          } else if (json.permissao == "A") {
+            window.location = "./home_analista.html"
+          } else {
+            window.location = "./home_root.html"
+          }
+
+
+        });
+
+      } else {
+
+        console.log('Erro de login!');
+
+        resposta.text().then(texto => {
+          verificacao.innerHTML = texto;
+
+          console.error(texto);
+        });
+      }
+    });
+
+    return false;
+  }
+</script>

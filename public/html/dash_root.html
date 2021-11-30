@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../css/reset.css" />
+    <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+    <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+    <link rel="stylesheet" href="../css/dash_root.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../JS/navbar.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="../JS/funcoes.js"></script>
+    <script type="text/javascript" src="../JS/graficos_servidor.js"></script>
+    <title>Dashboard Servidor</title>
+</head>
+<body>
+    <header>
+
+      <div class="menu">
+        <div class="he-grid">
+          <div class="logo_menu">
+            <a href="home_root.html"><img  src="../imagens/TOWER_TECH.png" /></a>
+          </div>
+
+          <div class="menu_fechado">
+            <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
+          </div>
+
+        </div>
+      </div>
+
+      <div class="header_desktop">
+        <div class="grid_desktop">
+          <div class="primeira_div">
+            <a href="home_root.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="" /></a>
+            <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
+          </div>
+          <div class="cadastro_servidor">
+            <h5>CADASTRO</h5>
+            <a href="./cad_empresa.html"><button>Cadastrar empresas</button></a>
+            <a href="./cad_torre.html"><button>Cadastrar torres</button></a>
+            <a href="./previsao_root.html"><button>Precisão de dados</button></a>
+          </div>
+          <div class="info_Servidor">
+            <h5>LOCALIZAÇÃO</h5>
+            <div class="scrollInfoServidor">
+              <div class="torres">
+                <div class="a1">
+                  <h3>Servidor AWS</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <section>
+        <div class="container__dash">
+            <div class="servidor">
+                <div class="titulo">
+                    <h1>SERVIDOR AWS</h1>
+                </div>
+                 
+                <div class="info_servidor">
+                    <div class="localizacao_servidor">
+                        <h3>Localização:</h3>
+                        <p>EUA - Virginia</p>
+                    </div>
+    
+                    <div class="status_servidor">
+                        <h3>Status:</h3>
+                        <p>Conectado</p>
+                        <div class="conexao"></div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="graficos">
+              <div class="grafico">
+                <h3>GRÁFICO CPU - TEMPO REAL <span id="id_cpu"> </span></h3>
+                <canvas id="canvas_grafico"></canvas>
+              </div>
+              
+              <div class="grafico">
+                <h3>GRÁFICO DISCO - TEMPO REAL <span id="id_disco"> </span></h3>
+                <canvas id="canvas_grafico1"></canvas>
+              </div>
+
+              <div class="grafico">
+                <h3>GRÁFICO MEMÓRIA RAM - TEMPO REAL <span id="id_ram"> </span></h3>
+                <canvas id="canvas_grafico2"></canvas>
+              </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+<script>
+  let proximaAtualizacao;
+  verificar_pagina("R")
+  verificar_autenticacao()
+  obterDadosGraficoPrimeiraVez()
+
+  function teste(){
+    window.location = "home_root.html"
+  }
+</script>

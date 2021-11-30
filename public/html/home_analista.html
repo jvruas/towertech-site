@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./../css/reset.css" />
+  <link rel="stylesheet" href="../css/home_analista.css" />
+  <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+  <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+  <script src="../JS/navbar.js"></script>
+  <script type="text/javascript" src="../JS/funcoes.js"></script>
+  <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+  <title>Home Analista</title>
+</head>
+
+<body>
+  <header>
+    
+    <div class="menu">
+      <div class="he-grid">
+        <div class="logo_menu">
+          <a href="home_analista.html"><img src="../imagens/TOWER_TECH.png" /></a>
+        </div>
+        <div class="menu_fechado">
+          <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
+        </div>
+      </div>
+    </div>
+
+    <div class="header_desktop">
+      <div class="grid_desktop">
+        <div class="primeira_div">
+          <a href="home_analista.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="Logo"/></a>
+          <!-- <img class="img_usuario" src="../imagens/Danilo.png" alt="" class="fernanda" /> -->
+          <h3>Bem Vindo(a), <span id="id_nome_usuario"></span>!</h3>
+        </div>
+        <div class="cadastro">
+          <h5>CADASTRO</h5>
+          <a href="./cad_maquina.html"><button>Cadastrar máquinas</button></a>
+        </div>
+        <div class="localizacao">
+          <h5>LOCALIZAÇÃO</h5>
+          <div class="scrollLocalizacao">
+            
+            
+          </div>
+        </div>
+        <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container__dashboard">
+      <div class="div_alertas">
+        <h2>ALERTAS</h2>
+
+        <div class="alertas">
+
+        
+        </div>
+      <div class="div_historico">
+        <h2 id="div_erro">HISTÓRICO DE CHAMADOS</h2>
+        <div class="indice">
+          <h3>Localização</h3>
+          <h3>Máquina</h3>
+          <h3>Data de abertura</h3>
+          <h3>Status</h3>
+        </div>
+        <div class="chamados">
+   
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
+<script src="../JS/home_analista.js"></script>
+<script>
+  verificar_pagina("A")
+  verificar_autenticacao()
+
+ 
+
+  var fkEmpresa;
+  function get_fk_empresa() {
+    fkEmpresa = sessionStorage.getItem('fk_empresa_meuapp')
+    qtdComputadores(fkEmpresa)
+  }
+
+  get_fk_empresa()
+  get_chamados_analista(fkEmpresa)
+
+  function qtdComputadores(fkEmpresa) {
+    fetch(`/usuarios/qtdComputadores/${fkEmpresa}`, {
+        cache: 'no-store'
+      }).then(function (response) {
+
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(resposta);
+            for (var i = 0; i < resposta.length; i++) {
+              document.querySelector('.alertas').innerHTML += `                      
+                      <div class="alerta alerta_laranja" id="${resposta[i].idComputador},${resposta[i].idTorre}" onclick="passarValor(${resposta[i].idComputador}, ${resposta[i].idTorre})">
+                                <h3>Máquina ${resposta[i].idComputador}</h3>
+                                <div class="descricao_alerta">
+                                  <div>
+                                    <h4>Localização</h4>                                    
+                                    <p>${resposta[i].nomeTorre}</p> 
+                                    <p>${resposta[i].cidadeTorre} - ${resposta[i].estadoTorre}</p>
+                                  </div>
+                                  <div>
+                                    <h4>Monitorando</h4>
+                                    <p>CPU, RAM, Disco, Internet, Usuário</p>
+                                  </div>
+                                </div>
+                              </div>`
+                var nomeTorre = resposta[i].nomeTorre
+                alterarCorBloco(`${resposta[i].idComputador}`,`${resposta[i].idTorre}`, nomeTorre, fkEmpresa)
+            }
+            
+            
+
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados: ${error.message}`);
+      });
+
+    return false;
+  }
+
+  qtdTorre(fkEmpresa)
+
+  function alterarCorBloco(fkComputador,fkTorre, nomeTorre, fkEmpresa) {
+    console.log(nomeTorre);
+    fetch(`/leituras/valorCpu/${fkComputador}/${fkTorre}/${fkEmpresa}`, {
+        cache: 'no-store'
+      }).then(function (response) {
+
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(resposta)
+            console.log(resposta[0])
+            var somaCpu = 0.0;
+            var somaRam = 0.0;
+            var somaDisco = 0.0;
+            var ocorrencia = "";
+            var componente = "";
+            var entrou = false;
+
+           
+
+            for (var i = 0;i < resposta.length; i++) {
+              var objectJson = resposta[i]
+              var str = JSON.parse(JSON.stringify(objectJson))                             
+              var somadoCpu = parseFloat(str.valorCpu)
+              var somadoRam = parseFloat(str.valorRam)
+              var somadoDisco = parseFloat(str.valorDisco)
+              somaCpu += somadoCpu
+              somaRam += somadoRam
+              somaDisco += somadoDisco
+
+              console.log(somaRam);
+            }
+           
+            let bloco = document.getElementById(`${fkComputador},${fkTorre}`)
+            if (somaCpu > 750) {       
+              entrou = true;       
+              ocorrencia = "Chamado de CPU"
+              componente = "CPU"
+              bloco.classList.remove('alerta_laranja')
+              bloco.classList.add('alerta_vermelho')
+              enviarAlerta(fkTorre, fkComputador, nomeTorre, ocorrencia, componente)
+            }
+            if (somaRam > 20) {              
+              entrou = true; 
+              ocorrencia = "Chamado de RAM"
+              componente = "RAM"
+              bloco.classList.remove('alerta_laranja')
+              bloco.classList.add('alerta_vermelho')
+              enviarAlerta(fkTorre, fkComputador, nomeTorre, ocorrencia, componente)
+            }
+            if (somaDisco > 850) {
+              entrou = true;             
+              ocorrencia = "Chamado de Disco"
+              componente = "Disco"
+              bloco.classList.remove('alerta_laranja')
+              bloco.classList.add('alerta_vermelho')
+              enviarAlerta(fkTorre, fkComputador, nomeTorre, ocorrencia, componente)
+            } if(!entrou) {
+              bloco.classList.remove('alerta_vermelho')
+              bloco.classList.add('alerta_laranja')
+            }
+
+
+            setTimeout(() => {  alterarCorBloco(fkComputador,fkTorre, nomeTorre, fkEmpresa) }, 10000);
+
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados: ${error.message}`);
+      });
+
+    return false;
+  }
+
+  setTimeout(() => {  qtdComputadoreNavBar(fkEmpresa); }, 2000);
+  
+  function enviarAlerta(fkTorre, fkComputador, nomeTorre, ocorrencia, componente){
+    var nome = get_nome()
+    var email = get_email()
+    var nomeT = nomeTorre
+    var sub = ocorrencia
+    console.log(nome, email, nomeT)
+    var reply = `Torre: ${nomeTorre}\n
+                 Computador: ${fkComputador}\n
+                 Componente que apresentou falha: ${componente}`
+    var dados = {
+              name: nome,
+              type: "1",
+              from: email,
+                reply: reply,
+                subject: sub 
+      }
+    const auth = "59563BEAFD9F83DA3FDC6855F15ED12D1450859563BEAFD9F83DA3FDC6855F15ED12D";
+    fetch(`https://towertech.uvdesk.com/en/api/tickets.json?access_token=${auth}`, {
+      method: 'POST',
+      body: JSON.stringify(dados)             
+    })
+    .then(function(response) {
+      if(response.ok){
+         
+        var dados = {
+          fkComputador : fkComputador,
+		      fkTorre : fkTorre,
+		      fkEmpresa: fkEmpresa,
+		      descricao : ocorrencia
+        } 
+        console.log(ocorrencia);
+        get_id_chamado(fkEmpresa, fkComputador, fkTorre, ocorrencia)
+        
+      }
+      return response.json()
+    })
+    .then(function(response){
+      console.log(response)
+    })
+   
+
+    
+  }
+
+  function insertChamado(idChamado, fkEmpresa, fkComputador, fkTorre, ocorrencia){    
+    fetch(`/chamados/cadastrarChamado/${idChamado}/${fkEmpresa}/${fkComputador}/${fkTorre}/${ocorrencia}`, {
+      method: "POST"
+    }).then(function (response) {
+
+      if (response.ok) {
+        console.log("chamado inserido com sucesso!")
+
+      } else {
+
+        console.log('Erro de cadastro!');
+        response.text().then(function (resposta) {
+          div_erro.innerHTML = resposta;
+        });
+      }
+    });
+
+    return false;
+  }
+
+  function get_id_chamado(fkEmpresa, fkComputador, fkTorre, ocorrencia) {
+    fetch(`/chamados/qtdChamados/${fkComputador}/${fkTorre}/${fkEmpresa}`, {
+        cache: 'no-store'
+      }).then(function (response) {
+
+        if (response.ok) {
+          var id_chamado = 0;
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(resposta[0].id);
+            id_chamado = resposta[0].id += 1;
+            console.log(typeof(id_chamado));
+            console.log(id_chamado);
+            
+            
+            insertChamado(id_chamado, fkEmpresa, fkComputador, fkTorre, ocorrencia);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados: ${error.message}`);
+      });
+
+    return false;
+  }
+  
+</script>

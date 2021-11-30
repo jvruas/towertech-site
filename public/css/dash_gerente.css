@@ -1,0 +1,238 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+}
+
+section {
+    display: flex;
+    width: calc(100vw - 328px);
+}
+
+.container__dashboard {
+    height: 100vh;
+    width: 100vw;
+    background-color: #F4F4F4;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.nome_equipe{
+    width: 60%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FF7A00;
+    border-radius: 10px;
+    color: #FFFFFF;
+    margin-top: 15px;
+}
+
+.graficos {
+    width: 90%;
+    height: 320px; 
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    justify-content: space-between;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.grafico {
+    width: 100%;
+    height: 320px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 12px -1px #707070;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container_grafico {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* height: 43vh; */
+}
+
+/* #grafico_barra_turno{
+    display: block;
+    box-sizing: border-box;
+    height: 254px;
+    width: 335px;
+} */
+
+/* .container_grafico canvas{ 
+    width: 90%;
+    height: 70%;
+} */
+
+.historico {
+    width: 90%;
+    height: 490px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.historico h2 {
+    color: #FF7A00;
+    text-align: center;
+    margin: 2% 1% 1% 1%;
+    font-size: 1.5rem;
+}
+
+.historico_titulos{
+    width: 100%;
+    height: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-around;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+}
+
+.grid_chamados {
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(7, 50px);
+    grid-auto-flow: row;
+    row-gap: 10px;
+    overflow: scroll;
+    height: 400px;
+    margin-top: 10px;
+}
+
+.grid_chamados::-webkit-scrollbar {
+    display: none;
+}
+
+.chamado {
+    width: 100%;
+    height: 50px;
+    font-size: 1.3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-around;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px -1px #707070;
+}
+
+.chamado span {
+    margin-right: 8rem;
+}
+
+#aberto {
+    background-color: #FFEDC9;
+}
+
+#concluido {
+    background-color: #CBFFDD;
+}
+
+
+@media (max-width: 1024px) {
+    section{
+        width: calc(100vw - 270px);
+    }
+}
+
+@media (max-width: 950px) {
+    .graficos{
+        height: 600px; 
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 280px);
+    }
+
+    .grafico {
+        height: 280px;
+    }
+
+    .container_grafico canvas{ 
+        width: 80%; 
+        height: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+
+    section{
+        width: 100vw;
+        display: flex;
+        align-items: center;
+    }
+
+    .graficos{
+        height: 700px; 
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 340px);
+    }
+
+    .grafico {
+        height: 320px;
+    }
+
+    .container_grafico {
+        width: 80%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
+@media (max-width: 680px) {
+    .container_grafico {
+        width: 90%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
+@media (max-width: 450px) {
+    .nome_equipe{
+        font-size: 1.0rem;
+        width: 80%;
+    }
+
+    .graficos{
+        height: 500px; 
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 240px);
+    }
+
+    .grafico {
+        height: 230px;
+    }
+
+    .historico h3, .historico p{
+        font-size: 1rem;
+    }
+
+}
+
+

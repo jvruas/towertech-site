@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./../css/reset.css" />  
+  <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/home_gerente.css" />
+  <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+  <script type="text/javascript" src="../JS/funcoes.js"></script>
+  <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+  <script src="../JS/navbar.js"></script>
+  <title>Home Gerente</title>
+</head>
+
+<body>
+  <header>
+
+    <div class="menu">
+      <div class="he-grid">
+        <div class="logo_menu">
+          <a href="home_gerente.html"><img src="../imagens/TOWER_TECH.png" /></a>
+        </div>
+        <div class="menu_fechado">
+          <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
+        </div>
+      </div>
+    </div>
+
+    <div class="header_desktop">
+      <div class="grid_desktop">
+        <div class="primeira_div">
+          <a href="home_gerente.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="Logo"/></a>
+          <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
+        </div>
+        <div class="cadastro_gerente">
+          <h5>CADASTRO</h5>
+          <a href="./cad_funcionario.html"><button>Cadastrar funcionários</button></a>
+          <a href="./previsao_gerente.html"><button>Previsão de dados</button></a>
+        </div>
+        <div class="localizacaoGerente">
+          <h5>LOCALIZAÇÃO</h5>
+          <div class="scrollLocalizacaoGerente">
+
+
+
+
+          </div>
+        </div>
+        <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h1>ALERTAS</h1>
+
+    <div class="alertas">
+
+      
+
+    </div>
+  </section>
+</body>
+
+</html>
+
+<script>
+  verificar_pagina("G")
+  verificar_autenticacao()
+
+  var fkEmpresa = get_fk_empresa();
+  function qtdTorre_alertas(fkEmpresa) {
+    fetch(`/usuarios/qtdTorres/${fkEmpresa}`, { cache: 'no-store' }).then(function (response) {
+        
+        if (response.ok) {                
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                console.log(resposta);  
+                for (var i = 0; i < resposta.length; i++) {
+                  document.querySelector('.alertas').innerHTML += ` <div class="alerta alerta_laranja" onclick="passarValor_gerente(${resposta[i].idTorre})">
+                          <h3>Equipe ${resposta[i].nomeTorre}</h3>
+                          <div class="descricao_alerta">
+                            <div>
+                              <h4>Localização</h4>
+                              <p>${resposta[i].cidadeTorre} - ${resposta[i].estadoTorre}</p>
+                            </div>
+                            <div>
+                              <h4>Monitorando</h4>
+                              <p>Performance da equipe</p>
+                            </div>
+                          </div>
+                        </div>` 
+                }  
+                             
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+
+    return false;
+}
+
+qtdTorre_alertas(fkEmpresa)
+qtdTorre_gerente(fkEmpresa)
+
+</script>

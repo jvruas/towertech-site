@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../css/reset.css" />
+    <link rel="sortcut icon" href="../imagens/icone_aviao.png" />
+    <link rel="stylesheet" href="../css/navbar_sistema2.css" />
+    <link rel="stylesheet" href="../css/previsao_root.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../JS/navbar.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="../JS/funcoes.js"></script>
+    <script type="text/javascript" src="../JS/funcoes_backend.js"></script>
+    <script type="text/javascript" src="../JS/graficos_servidor.js"></script>
+    <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <title>Previsão root</title>
+</head>
+<body>
+    <header>
+
+        <div class="menu">
+          <div class="he-grid">
+            <div class="logo_menu">
+                <a href="home_root.html"><img  src="../imagens/TOWER_TECH.png" /></a>
+            </div>
+
+            <div class="menu_fechado">
+              <img src="../imagens/icone_menu.png" id="menu" onclick="abrirMenuSistema()" />
+            </div>
+
+          </div>
+        </div>
+
+        <div class="header_desktop">
+          <div class="grid_desktop">
+            <div class="primeira_div">
+                <a href="home_root.html" id="logo_menu_desktop"><img src="../imagens/TOWER_TECH.png" id="logo_menu_desktop" alt="" /></a>
+              <h3>Bem-vindo(a), <span id="id_nome_usuario"></span>!</h3>
+            </div>
+            <div class="cadastro_servidor">
+              <h5>CADASTRO</h5>
+              <a href="./cad_empresa.html"><button>Cadastrar empresas</button></a>
+              <a href="./cad_torre.html"><button>Cadastrar torres</button></a>
+              <a href="./previsao_root.html"><button>Precisão de dados</button></a>
+            </div>
+            <div class="info_Servidor">
+              <h5>LOCALIZAÇÃO</h5>
+              <div class="scrollInfoServidor">
+                <div class="torres">
+                  <div class="a1">
+                    <h3 onclick="get_pagina_servidor()">Servidor AWS</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="sair" onclick="logoff()"><i class="fas fa-sign-out-alt"></i></a>
+          </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container__dash">
+            
+            <div class="titulo">
+                <h1>PREVISÃO DE DADOS DO SERVIDOR</h1>
+            </div>
+
+            <div class="graficos">
+              <div class="grafico">
+                <h3>Decolagens por Mês<span id="id_cpu"> </span></h3>
+                <canvas id="canvas_grafico1"></canvas>
+              </div>
+              
+              <div class="grafico">
+                <h3>Quantidade de computadores por Mês<span id="id_disco"> </span></h3>
+                <canvas id="canvas_grafico2"></canvas>
+              </div>
+
+              <div class="grafico">
+                <h3>Custo por Mês (US$)<span id="id_ram"> </span></h3>
+                <canvas id="canvas_grafico3"></canvas>
+              </div>
+
+              <div class="info">
+                <h3>Nuvem de Palavras<span id="id_ram"> </span></h3>
+
+                <div class="container_wordclound">
+                    <img src="../imagens/wordclound.png" alt="" style="height: 180px;">
+                </div>
+
+              </div>
+            </div>
+                            
+            <div class="info_botao">
+                <button id="botao_info">Relatórios</button>                      
+            </div>
+
+            <div class="popup_wrapper_info">
+                <div class="popup_info">
+                    <div class="popup_close_info">x</div>
+        
+                    <div class="popup_content_info">
+                        <h2>Relatório</h2>
+                        
+                        <div class="content">
+
+                            <div class="content_mes">
+                                <h2>Decolagens no mês</h2>
+                                <h3>Previsão Novembro: -4.78%</h3>
+                                <h3>Previsão dezembro: -0.39%</h3>
+                            </div>
+
+                            <div class="content_dados">
+                                <h2>Computadores no mês</h2>
+                                <h3>Previsão Novembro: -6.49%</h3>
+                                <h3>Previsão dezembro: -0.79%</h3>
+                            </div>
+
+                            <div class="content_custo">
+                                <h2>Custo no mês</h2>
+                                <h3>Previsão Novembro: -44%</h3>
+                                <h3>Previsão dezembro: 0%</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+verificar_pagina("R")
+verificar_autenticacao()
+function previsaoDecolagemMes(mes) {
+        var valorDecolagens = (-300.3*mes) + 80695.2
+        return(valorDecolagens)
+    }
+
+    function previsaoQtdComputador(decolagem) {
+        var valorDados = (3.196e-02*decolagem) + -1.333e+03
+        return(valorDados)
+    }
+
+    function previsaoCustoDados(mes) {
+        var valorCustos = (0.00348*mes) + 14.04676
+        return(valorCustos)
+    }
+
+    const ctx1 = document.getElementById('canvas_grafico1').getContext('2d');
+    const canvas_grafico1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            datasets: [
+                {
+                label: 'Decolagens',
+                data: [89715, 77234, 80724, 75277, 73014, 71916, 83094, 79495, 78684, 81280],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ], 
+                    borderWidth: 1
+                },
+                {
+                label: 'Previsão Decolagens',
+                data: [0,0,0,0,0,0,0,0,0,0, previsaoDecolagemMes(11), previsaoDecolagemMes(12)],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)'
+
+                ],
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('canvas_grafico2').getContext('2d');
+    const canvas_grafico2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            datasets: [{
+                label: 'Qtd Computador',
+                data: [1346, 1159, 1211, 1129, 1095, 1079, 1246, 1192, 1180, 1219],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ], 
+                    borderWidth: 1
+                },
+                {
+                label: 'Previsão Qtd Computador',
+                data: [0,0,0,0,0,0,0,0,0,0, previsaoQtdComputador(77392), previsaoQtdComputador(77092)],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)'
+
+                ],
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx3 = document.getElementById('canvas_grafico3').getContext('2d');
+    const canvas_grafico3 = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            datasets: [{
+                label: 'Custos',
+                data: [10, 15, 16, 17, 17, 19, 20, 21, 22, 25],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ], 
+                    borderWidth: 1
+                },
+                {
+                label: 'Previsão Custos',
+                data: [0,0,0,0,0,0,0,0,0,0, previsaoCustoDados(11), previsaoCustoDados(12)],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)'
+
+                ],
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<script>
+    const button_info = document.querySelector('#botao_info')
+
+    const popup_info = document.querySelector('.popup_wrapper_info')
+
+    const closeButton_info = document.querySelector('.popup_close_info')
+
+    button_info.addEventListener('click', () => {
+        popup_info.style.display = 'block'
+    })
+
+    closeButton_info.addEventListener('click', () => {
+        popup_info.style.display = 'none'
+    })
+
+</script>
+
+<script>
+
+    
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
+ 
+    var myConfig = {
+      type: 'wordcloud',
+      options: {
+      words: [
+          {
+          text: "Janeiro",
+          count: 89715
+          },
+          {
+          text: "Fevereiro",
+          count: 57234
+          },
+          {
+          text: "Março",
+          count: 60724
+          },
+          {
+          text: "Abril",
+          count: 35277
+          },
+          {
+          text: "Maio",
+          count: 33014
+          },
+          {
+          text: "Junho",
+          count: 31916
+          },
+          {
+          text: "Julho",
+          count: 83094
+          },
+          {
+          text: "Agosto",
+          count: 59495
+          },
+          {
+          text: "Setembro",
+          count: 58684
+          },
+          {
+          text: "Outubro",
+          count: 61280
+          },
+          {
+          text: "Novembro",
+          count: 59029
+          },
+          {
+          text: "Dezembro",
+          count: 85844
+          }
+      ]
+      },
+    };
+ 
+    zingchart.render({
+      id: 'chartWordClound',
+      data: myConfig,
+      height: 300,
+      width: '100%'
+    });
+  </script>
